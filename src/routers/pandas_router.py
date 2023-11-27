@@ -44,3 +44,16 @@ def apply_correlation_matrix(dataset: DatesetType):
     figure.savefig(outfile_name, bbox_inches="tight")
     return FileResponse(outfile_name)
     
+    
+@router.get("/apply_scatterplot", tags=["Funciones panda"])
+def apply_scatterplot():
+    midata =  pd.read_csv ('/mnt/c/Labs/pandas/ipri2.csv', encoding = "ISO-8859-1")
+    for col in midata.columns:
+        print(col)
+        
+    midata.head()
+    svm=sns.scatterplot(data=midata, x="salario", y="valor_indice")
+    
+    figure = svm.get_figure()    
+    figure.savefig('plot.png', dpi=1000)
+    return FileResponse('plot.png')
